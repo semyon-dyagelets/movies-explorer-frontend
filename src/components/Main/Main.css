@@ -1,0 +1,14 @@
+.main__container {
+  width: calc(100% - 70px * 2);
+  margin: 0 auto;
+  padding: 100px 0 100px;
+}
+
+.main__title {
+  min-height: 50px;
+  margin: 0 auto 23px 0;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 27px;
+  border-bottom: 1px solid #000000;
+}

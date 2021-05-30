@@ -1,0 +1,136 @@
+.search-form__container {
+  padding: 70px 0;
+}
+
+.search-form__box {
+  position: relative;
+  margin: 0 auto;
+  display: flex;
+  height: 72px;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f4f4f4;
+  border-radius: 9px;
+}
+
+.search-form__input {
+  background: url("../../../images/icon-search-grey.svg") left no-repeat;
+  padding-left: 30px;
+}
+
+.search-form__input-container {
+  display: flex;
+  align-items: center;
+}
+
+.search-form__find-container {
+  display: flex;
+  align-content: center;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+  padding-right: 1%;
+  border-right: 1px solid CBCBCB;
+}
+
+.search-form__input {
+  background-color: #f4f4f4;
+  color: #a0a0a0;
+  border: none;
+  font-size: 18px;
+  line-height: 20px;
+}
+
+.search-form__buttons-container {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-form__button-find {
+  width: 80px;
+  height: 34px;
+  border: none;
+  border-radius: 48px;
+  border-style: none;
+  background: #3456f3 url("../../../images/icon-search.svg") center no-repeat;
+  cursor: pointer;
+}
+
+.search-form__shortfilms-container {
+  display: flex;
+  align-content: center;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 1%;
+}
+
+.search-form__shortfilms-toggle {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+  margin: 0;
+  vertical-align: top;
+  background: #ffffff;
+  border: 1px solid #bbc1e1;
+  background-color: #ebebeb;
+  border-radius: 20px;
+  outline: none;
+  cursor: pointer;
+}
+
+.search-form__shortfilms-toggle::after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  right: 19px;
+  top: 0px;
+  width: 16px;
+  height: 16px;
+  background-color: #fff;
+  border-radius: 50%;
+  border: 1px solid #ffffff;
+  transform: translateX(0);
+}
+
+.search-form__shortfilms-toggle:checked::after {
+  transform: translateX(calc(100% - 1px));
+  background-color: #fff;
+}
+.search-form__shortfilms-toggle:checked {
+  background-color: #2be080;
+}
+
+.search-form__shortfilms-condition {
+  margin: 0 30px 0 15px;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+@media screen and (max-width: 767px) {
+  .search-form__input {
+    background: none;
+    padding-left: 0;
+  }
+
+  .search-form__find-container {
+    width: 100%;
+  }
+
+  .search-form__shortfilms-container {
+    position: absolute;
+    top: 100px;
+    left: 35%;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+  }
+}

@@ -1,0 +1,65 @@
+.promo {
+  background-color: #dddee3;
+  overflow: hidden;
+}
+
+.promo__container {
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 70px * 2);
+  margin: 0 auto;
+  padding: 50px 0;
+}
+
+.promo__title {
+  margin: 0;
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 52px;
+}
+
+.promo__image {
+  background-image: url("../../../images/text__COLOR_landing-logo.png");
+  background-size: cover;
+  height: 244px;
+  width: 722px;
+  align-self: flex-end;
+  margin-top: 100px;
+}
+
+@media screen and (max-width: 1023px) {
+  .promo__container {
+    width: calc(100% - 44px * 2);
+    margin: 0 auto;
+    padding-top: 300px;
+  }
+
+  .promo__title {
+    text-align: center;
+  }
+
+  .promo__image {
+    height: 230px;
+    width: 680px;
+    align-self: center;
+    margin-top: 140px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .promo__container {
+    width: calc(100% - 10px * 2);
+    margin: 0 auto;
+    padding-top: 180px;
+  }
+
+  .promo__title {
+    max-width: 300px;
+    line-height: 39px;
+    font-size: 31px;
+  }
+
+  .promo__image {
+    margin-top: 60px;
+  }
+}

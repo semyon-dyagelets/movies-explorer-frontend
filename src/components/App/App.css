@@ -1,0 +1,35 @@
+.page {
+  width: 100%;
+  min-width: 320px;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0;
+  background-color: #fafafa;
+  font-family: "Inter", "Arial", sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+.app__link {
+  text-decoration: none;
+}
+
+.app__link:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.app__link:visited {
+  text-decoration: none;
+}
+
+.app__button {
+  background: #3456f3;
+  color: #ffffff;
+  border-radius: 3px;
+  border: none;
+}
+
+.app__button:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
