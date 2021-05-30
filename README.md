@@ -5,3 +5,6 @@ frontend for diploma project ** дипломный проект
 *Публичный адрес сервера https://84.252.134.87
 *Бэкенд https://api.movielibrary.nomoredomains.monster
 *Фронтенд https://movielibrary.nomoredomains.monster
+
+Макет https://www.figma.com/file/YQCkarWUZIs4BZdr46Z6ZF/Diploma-Copy
+
