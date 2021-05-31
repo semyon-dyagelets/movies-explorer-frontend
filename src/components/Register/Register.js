@@ -26,20 +26,23 @@ function Register() {
             id="name"
             name="name"
             type="text"
-          ></input>
+            required
+          />
           <p className="authorization__input-name">E-mail</p>
           <input
             className="authorization__input"
             id="email"
             name="email"
             type="email"
-          ></input>
+            required
+          />
           <p className="authorization__input-name">Пароль</p>
           <input
             className="authorization__input"
             id="password"
             type="password"
-          ></input>
+            required
+          />
           <button className="app__button authorization__button" type="submit">
             Зарегистрироваться
           </button>

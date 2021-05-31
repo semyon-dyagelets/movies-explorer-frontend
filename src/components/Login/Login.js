@@ -26,13 +26,15 @@ function Login() {
             id="email"
             name="email"
             type="email"
-          ></input>
+            required
+          />
           <p className="authorization__input-name">Пароль</p>
           <input
             className="authorization__input"
             id="password"
             type="password"
-          ></input>
+            required
+          />
           <button className="app__button authorization__button" type="submit">
             Зарегистрироваться
           </button>

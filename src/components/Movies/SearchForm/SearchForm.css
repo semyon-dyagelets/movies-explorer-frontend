@@ -13,9 +13,20 @@
   border-radius: 9px;
 }
 
+
 .search-form__input {
-  background: url("../../../images/icon-search-grey.svg") left no-repeat;
+  width: 50%;
   padding-left: 30px;
+  background: url("../../../images/icon-search-grey.svg") left no-repeat;
+  background-color: #f4f4f4;
+  color: #a0a0a0;
+  border: none;
+  font-size: 18px;
+  line-height: 20px;
+}
+
+.search-form__input:focus {
+  outline: 1px solid #a0a0a0;
 }
 
 .search-form__input-container {
@@ -29,16 +40,8 @@
   justify-content: space-between;
   align-items: center;
   width: 80%;
-  padding-right: 1%;
-  border-right: 1px solid CBCBCB;
-}
-
-.search-form__input {
-  background-color: #f4f4f4;
-  color: #a0a0a0;
-  border: none;
-  font-size: 18px;
-  line-height: 20px;
+  padding-right: 19px;
+  border-right: 1px solid #CBCBCB;
 }
 
 .search-form__buttons-container {
@@ -63,7 +66,7 @@
   align-content: center;
   justify-content: flex-start;
   align-items: center;
-  padding-left: 1%;
+  padding-left: 19px;
 }
 
 .search-form__shortfilms-toggle {
@@ -93,7 +96,7 @@
   top: 0px;
   width: 16px;
   height: 16px;
-  background-color: #fff;
+  background-color: #2BE080;
   border-radius: 50%;
   border: 1px solid #ffffff;
   transform: translateX(0);
@@ -101,10 +104,6 @@
 
 .search-form__shortfilms-toggle:checked::after {
   transform: translateX(calc(100% - 1px));
-  background-color: #fff;
-}
-.search-form__shortfilms-toggle:checked {
-  background-color: #2be080;
 }
 
 .search-form__shortfilms-condition {
@@ -116,21 +115,24 @@
 @media screen and (max-width: 767px) {
   .search-form__input {
     background: none;
-    padding-left: 0;
+    padding-left: 20px;
   }
 
   .search-form__find-container {
     width: 100%;
+    border-right: none;
   }
 
   .search-form__shortfilms-container {
     position: absolute;
     top: 100px;
     left: 35%;
+    padding-left: 0;
     display: flex;
     flex-direction: row;
     align-content: center;
     align-items: center;
     justify-content: center;
+
   }
 }
