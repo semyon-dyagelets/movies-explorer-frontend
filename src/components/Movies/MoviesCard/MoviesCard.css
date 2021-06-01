@@ -1,0 +1,52 @@
+.movie__photo {
+  width: 100%;
+}
+
+.movie__description {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.movie__title {
+  margin: 0;
+  font-size: 13px;
+  line-height: 16px;
+}
+
+.movie__like {
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: 36px;
+  background: url("../../../images/like-icon-white.svg") center no-repeat;
+  background-color: #f4f4f4;
+  cursor: pointer;
+}
+
+.movie__like_active {
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: 36px;
+  background: url("../../../images/like-icon-active.svg") center no-repeat;
+  cursor: pointer;
+}
+
+.movie__delete {
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: 36px;
+  background: url("../../../images/icon-delete.svg") center no-repeat;
+  background-color: #f4f4f4;
+  cursor: pointer;
+}
+
+.movie__length {
+  border-top: 1px solid #e8e8e8;
+  font-size: 11px;
+  line-height: 14px;
+}
