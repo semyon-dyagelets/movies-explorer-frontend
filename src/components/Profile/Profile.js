@@ -1,21 +1,59 @@
 import "./Profile.css";
-import { Link } from "react-router-dom";
-import Header from "../Header/Header";
+import React, { useEffect, useState } from "react";
+import useFormValidation from "../../utils/useFormValidation.js";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
-function Profile({ username }) {
+function Profile({ onUpdateUser, onSignOut }) {
+  const currentUser = React.useContext(CurrentUserContext);
+  const {
+    values,
+    setValues,
+    errors,
+    isFormCorrect,
+    setIsFormCorrect,
+    handleChange,
+  } = useFormValidation();
+
+  const [isEditingAvailable, setIsEditingAvailable] = useState(false);
+
+  useEffect(() => {
+    setValues({
+      name: currentUser.name,
+      email: currentUser.email,
+    });
+  }, [setValues, currentUser]);
+
+  useEffect(() => {
+    if (
+      currentUser.name === values.name &&
+      currentUser.email === values.email
+    ) {
+      setIsFormCorrect(false);
+    }
+  }, [currentUser, values, setIsFormCorrect]);
+
+  function handleEditProfile() {
+    setIsEditingAvailable(true);
+  };
+
+  function handleSubmit(evt) {
+    evt.PreventDefault();
+    onUpdateUser(values.name, values.email);
+  };
+
   return (
     <>
-      <Header />
       <div className="authorization">
         <div className="authorization__container profile__container">
           <h2 className="authorization__title profile__title">
-            Привет, {username}!
+            {`Привет, ${currentUser.name}!`}
           </h2>
           <form
             className="authorization__form"
             name="profile"
             method="POST"
             noValidate
+            onSubmit={handleSubmit}
           >
             <div className="profile__input-container">
               <p className="profile__input-name">Имя</p>
@@ -24,7 +62,18 @@ function Profile({ username }) {
                 id="name"
                 name="name"
                 type="text"
+                value={values.name || ""}
+                minLength="2"
+                maxLength="30"
+                pattern="^[A-Za-zА-Яа-яЁё /s -]+$"
+                onChange={handleChange}
+                disabled={!isEditingAvailable}
               ></input>
+              <span id="name-error" className="profile__error-input">
+                {errors.name
+                  ? "Поле должно быть заполнено и содержать только буквы, пробел или дефис"
+                  : ""}
+              </span>
             </div>
             <div className="profile__input-container">
               <p className="profile__input-name">E-mail</p>
@@ -33,18 +82,36 @@ function Profile({ username }) {
                 id="email"
                 name="email"
                 type="email"
+                value={values.email || ""}
+                onChange={handleChange}
+                disabled={!isEditingAvailable}
               ></input>
+              <span id="email-error" className="profile__error-input">
+                {errors.email || ""}
+              </span>
             </div>
-            <button
-              className="authorization__button profile__button"
-              type="submit"
-            >
-              Редактировать
-            </button>
+
+            {isEditingAvailable ? (
+              <button
+                className="authorization__button profile__button"
+                type="submit"
+                disabled={!isFormCorrect}
+              >
+                Сохранить
+              </button>
+            ) : (
+              <button
+                className="authorization__button profile__button"
+                type="button"
+                onClick={handleEditProfile}
+              >
+                Редактировать
+              </button>
+            )}
           </form>
-          <Link className="app__link profile__link" to="/signin">
+          <p className="app__link profile__link" onClick={onSignOut}>
             Выйти из аккаунта
-          </Link>
+          </p>
         </div>
       </div>
     </>

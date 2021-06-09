@@ -21,15 +21,3 @@
 .app__link:visited {
   text-decoration: none;
 }
-
-.app__button {
-  background: #3456f3;
-  color: #ffffff;
-  border-radius: 3px;
-  border: none;
-}
-
-.app__button:hover {
-  cursor: pointer;
-  opacity: 0.8;
-}

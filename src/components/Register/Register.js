@@ -1,8 +1,20 @@
 import "./Register.css";
+import React from "react";
 import { Link } from "react-router-dom";
+import useFormValidation from "../../utils/useFormValidation";
+import ErrorInfoTool from "../ErrorInfoTool/ErrorInfoTool";
 import headerLogo from "../../images/logo.svg";
 
-function Register() {
+function Register({ onRegister, isErrorShown }) {
+  const { values, errors, isFormCorrect, handleChange, resetForm } =
+    useFormValidation();
+
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    onRegister(values.name, values.email, values.password);
+    resetForm();
+  };
+
   return (
     <div className="authorization">
       <div className="authorization__container">
@@ -17,7 +29,7 @@ function Register() {
         <form
           className="authorization__form"
           name="register"
-          method="POST"
+          onSubmit={handleSubmit}
           noValidate
         >
           <p className="authorization__input-name">Имя</p>
@@ -26,24 +38,50 @@ function Register() {
             id="name"
             name="name"
             type="text"
+            value={values.name || ""}
+            pattern="^[A-Za-zА-Яа-яЁё /s -]+$"
+            onChange={handleChange}
             required
           />
+          <span id="name-error" className="authorization__input-error">
+            {errors.name
+              ? `Поле должно быть заполнено и содержать только буквы, пробел или дефис`
+              : ""}{" "}
+          </span>
           <p className="authorization__input-name">E-mail</p>
           <input
             className="authorization__input"
             id="email"
             name="email"
             type="email"
+            value={values.email || ""}
+            onChange={handleChange}
             required
           />
+          <span id="email-error" className="authorization__input-error">
+            {errors.email || ""}{" "}
+          </span>
           <p className="authorization__input-name">Пароль</p>
           <input
             className="authorization__input"
             id="password"
+            name="password"
             type="password"
+            value={values.password || ""}
+            onChange={handleChange}
             required
           />
-          <button className="app__button authorization__button" type="submit">
+          <span id="password-error" className="authorization__input-error">
+            {errors.password || ""}{" "}
+          </span>
+
+          <ErrorInfoTool isShown={isErrorShown} />
+
+          <button
+            className="authorization__button"
+            type="submit"
+            disabled={!isFormCorrect}
+          >
             Зарегистрироваться
           </button>
         </form>

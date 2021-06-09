@@ -7,7 +7,7 @@
   margin: 0 auto;
   display: flex;
   height: 72px;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   align-items: center;
   background-color: #f4f4f4;
   border-radius: 9px;
@@ -32,6 +32,12 @@
 .search-form__input-container {
   display: flex;
   align-items: center;
+}
+
+.search-form__error-text {
+  font-size: 10px;
+  line-height: 12px;
+  color: #EE3465;
 }
 
 .search-form__find-container {
@@ -61,6 +67,7 @@
   cursor: pointer;
 }
 
+/* СТАРЫЙ ЧЕКБОКС  */
 .search-form__shortfilms-container {
   display: flex;
   align-content: center;
@@ -112,6 +119,84 @@
   line-height: 18px;
 }
 
+/* НОВЫЙ ЧЕКБОКС */
+.search-form__filter-box{
+  display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    flex-direction: row;
+    padding: 0 19px;
+}
+
+.search-form__filter-name{
+  font-size: 13px;
+    line-height: 18px;
+    margin: 0 0 0px 14px;
+}
+  
+.search-form__filter{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  height: 20px;
+  width: 36px;
+  margin: 0;
+  background-color: #EBEBEB;
+  border-radius: 20px;
+  padding: 6px;
+  position: relative;
+}
+
+.search-form__filter_active{
+  background-color: #EBEBEB;
+}
+
+.search-form__filter:hover .search-form__switch{
+  transform: scale(1.7);
+}
+
+.search-form__radio{
+  position: absolute;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  height: 20px;
+  width: 50px;
+  opacity: 0;
+  z-index: 3;
+}
+
+.search-form__radio:hover{
+  cursor: pointer;
+}
+
+.search-form__switch{
+  box-sizing: border-box;
+  height: 12px;
+  width: 12px;
+  background-color: #2BE080;
+    border-radius: 50%;
+    border: 1px solid #FFFFFF;
+  position: relative;
+  left: 0;
+  z-index: 2;
+  transition: transform .3s ease-in;
+}
+
+.search-form__radio:checked ~ .search-form__switch{
+  left: 0;
+}
+
+.search-form__radio ~ :checked ~ .search-form__switch{
+  left: 16px;
+}
+
+.search-form__filter .search-form__radio:checked{
+  z-index: 1;
+}
+
 @media screen and (max-width: 767px) {
   .search-form__input {
     background: none;
@@ -123,7 +208,7 @@
     border-right: none;
   }
 
-  .search-form__shortfilms-container {
+  .search-form__filter-box {
     position: absolute;
     top: 100px;
     left: 35%;

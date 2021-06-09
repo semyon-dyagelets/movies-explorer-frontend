@@ -1,8 +1,20 @@
 import "./Login.css";
+import React from "react";
 import { Link } from "react-router-dom";
+import useFormValidation from "../../utils/useFormValidation";
+import ErrorInfoTool from "../ErrorInfoTool/ErrorInfoTool";
 import headerLogo from "../../images/logo.svg";
 
-function Login() {
+function Login({ onLogin, isErrorShown }) {
+  const { values, errors, isFormCorrect, handleChange, resetForm } =
+    useFormValidation();
+
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    onLogin(values.email, values.password);
+    resetForm();
+  };
+
   return (
     <div className="authorization">
       <div className="authorization__container">
@@ -18,25 +30,46 @@ function Login() {
           className="authorization__form"
           name="register"
           method="POST"
+          onSubmit={handleSubmit}
           noValidate
         >
-          <p className="authorization__input-name">E-mail</p>
+          <label className="authorization__input-name">E-mail</label>
           <input
             className="authorization__input"
             id="email"
             name="email"
             type="email"
+            value={values.email || ""}
+            onChange={handleChange}
             required
           />
-          <p className="authorization__input-name">Пароль</p>
+          <span id="email-error" className="authorization__input-error">
+            {errors.email || ""}{" "}
+          </span>
+          <label className="authorization__input-name">Пароль</label>
           <input
             className="authorization__input"
             id="password"
+            name="password"
             type="password"
+            value={values.password || ""}
+            onChange={handleChange}
             required
           />
-          <button className="app__button authorization__button" type="submit">
-            Зарегистрироваться
+          <span id="password-error" className="authorization__input-error">
+            {errors.password || ""}{" "}
+          </span>
+
+          <ErrorInfoTool
+          isShown={isErrorShown}
+          />
+
+          <button
+            className="authorization__button"
+            type="submit"
+            disabled={!isFormCorrect}
+          >
+            Войти
           </button>
         </form>
         <div className="authorization__question">

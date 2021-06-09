@@ -1,74 +1,37 @@
 import "./MoviesCard.css";
-import movieExample from "../../../images/example-movie.png";
+import { convertDurationToHHMM } from "../../../utils/utils";
 
-function MoviesCard() {
+function MoviesCard({ card, onLikeMovie, onDeleteMovie, liked, savedPage }) {
+  function handleLikeClick() {
+    onLikeMovie(card);
+  }
+
+  function handleDeleteClick() {
+    onDeleteMovie(card);
+  }
+
   return (
-    <>
-      <article className="movie">
-        <img className="movie__photo" src={movieExample} alt="кадр фильма" />
-        <div className="movie__description">
-          <h2 className="movie__title">33 слова о дизайне</h2>
-          <button
-            className="movie__like"
-            type="button"
-            aria-label="лайк"
-          ></button>
-        </div>
-        <p className="movie__length">1ч42м</p>
-      </article>
-
-      <article className="movie">
-        <img className="movie__photo" src={movieExample} alt="кадр фильма" />
-        <div className="movie__description">
-          <h2 className="movie__title">33 слова о дизайне</h2>
-          <button
-            className="movie__like movie__like_active"
-            type="button"
-            aria-label="лайк"
-          ></button>
-        </div>
-        <p className="movie__length">1ч42м</p>
-      </article>
-
-      <article className="movie">
-        <img className="movie__photo" src={movieExample} alt="кадр фильма" />
-        <div className="movie__description">
-          <h2 className="movie__title">33 слова о дизайне</h2>
-          <button
-            className="movie__like"
-            type="button"
-            aria-label="лайк"
-          ></button>
-        </div>
-        <p className="movie__length">1ч42м</p>
-      </article>
-
-      <article className="movie">
-        <img className="movie__photo" src={movieExample} alt="кадр фильма" />
-        <div className="movie__description">
-          <h2 className="movie__title">33 слова о дизайне</h2>
-          <button
-            className="movie__like"
-            type="button"
-            aria-label="лайк"
-          ></button>
-        </div>
-        <p className="movie__length">1ч42м</p>
-      </article>
-
-      <article className="movie">
-        <img className="movie__photo" src={movieExample} alt="кадр фильма" />
-        <div className="movie__description">
-          <h2 className="movie__title">33 слова о дизайне</h2>
-          <button
-            className="movie__like"
-            type="button"
-            aria-label="лайк"
-          ></button>
-        </div>
-        <p className="movie__length">1ч42м</p>
-      </article>
-    </>
+    <article className="movie">
+      <a href={card.trailerLink} target="_blank" rel="noreferrer">
+        {card.image && (
+          <img className="movie__photo" src={`${card.image}`} alt="фильм" />
+        )}
+      </a>
+      <div className="movie__description">
+        <h2 className="movie__title">{card.nameRU}</h2>
+        <button
+          className={`movie__like 
+            ${liked && !savedPage ? "movie__like_active" : ""} 
+            ${savedPage ? "movie__delete" : ""}`}
+          type="button"
+          aria-label="лайк"
+          onClick={savedPage || liked ? handleDeleteClick : handleLikeClick}
+        ></button>
+      </div>
+      <span className="movie__length">
+        {convertDurationToHHMM(card.duration)}
+      </span>
+    </article>
   );
 }
 
