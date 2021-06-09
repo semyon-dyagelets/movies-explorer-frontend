@@ -16,7 +16,6 @@ function SearchForm({
     isFormCorrect,
     setIsFormCorrect,
     handleChange,
-    resetForm,
   } = useFormValidation();
 
   useEffect(() => {
@@ -32,7 +31,6 @@ function SearchForm({
   function handleSubmit(evt) {
     evt.preventDefault();
     onSearchFormSubmit(values.query);
-    resetForm();
   };
 
   return (

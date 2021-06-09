@@ -2,6 +2,12 @@ import "./MoviesCard.css";
 import { convertDurationToHHMM } from "../../../utils/utils";
 
 function MoviesCard({ card, onLikeMovie, onDeleteMovie, liked, savedPage }) {
+
+  const imageUrl = card?.image?.url ?
+   `${'https://api.nomoreparties.co'}${card?.image?.url}`
+   :
+    card.image;
+
   function handleLikeClick() {
     onLikeMovie(card);
   }
@@ -10,12 +16,11 @@ function MoviesCard({ card, onLikeMovie, onDeleteMovie, liked, savedPage }) {
     onDeleteMovie(card);
   }
 
+
   return (
     <article className="movie">
       <a href={card.trailerLink} target="_blank" rel="noreferrer">
-        {card.image && (
-          <img className="movie__photo" src={`${card.image}`} alt="фильм" />
-        )}
+        <img className="movie__photo" src={imageUrl} alt="фильм" />
       </a>
       <div className="movie__description">
         <h2 className="movie__title">{card.nameRU}</h2>

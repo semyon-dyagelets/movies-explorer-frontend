@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import "./Movies.css";
 import MoviesCardsList from "./MoviesCardsList/MoviesCardsList";
 import SearchForm from "./SearchForm/SearchForm";
 import {
@@ -8,10 +7,15 @@ import {
   setDefaultImage,
 } from "../../utils/utils";
 import moviesApi from "../../utils/MoviesApi";
+import "./Movies.css";
 
 function Movies({ onDeleteMovie, onLikeMovie, savedMovies }) {
+
   const forCheckbox =
-    localStorage.getItem("shortFilms") === "on" ? "on" : "off";
+    localStorage.getItem("shortFilms") === "on" ? 
+    "on" 
+    :
+    "off";
 
   const [searchQuery, setSearchQuery] = useState("");
   const [shortFilms, setShortFilms] = useState(forCheckbox);
@@ -24,7 +28,10 @@ function Movies({ onDeleteMovie, onLikeMovie, savedMovies }) {
   function handleSetFilteredMovies(movies, query, checkbox) {
     const moviesList = filterMovies(movies, query);
     setFilteredMovies(
-      checkbox === "on" ? filterShortMovies(moviesList) : moviesList
+      checkbox === "on" ? 
+      filterShortMovies(moviesList) 
+      :
+      moviesList
     );
     localStorage.setItem("movies", JSON.stringify(moviesList));
   }
@@ -55,9 +62,9 @@ function Movies({ onDeleteMovie, onLikeMovie, savedMovies }) {
     }
   }
 
-  function handleShortFilms(e) {
-    setShortFilms(e.target.value);
-    localStorage.setItem("shortFilms", e.target.value);
+  function handleShortFilms(evt) {
+    setShortFilms(evt.target.value);
+    localStorage.setItem("shortFilms", evt.target.value);
   }
 
   function handleCheckFilteredMovies(arr) {

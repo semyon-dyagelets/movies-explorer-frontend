@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./MoviesCardsList.css";
 import { getSavedMovie, useWindowWidth } from "../../../utils/utils";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import Preloader from "../Preloader/Preloader";
+import { CARDS_TO_SHOW_AT_1331,
+  CARDS_TO_SHOW_AT_1027_1331,
+  CARDS_TO_SHOW_AT_629_1027,
+  CARDS_TO_SHOW_AT_629, } from "../../../utils/constants";
 
 function MoviesCardsList({
   isLoading,
@@ -19,20 +23,20 @@ function MoviesCardsList({
   const [cardsShowParams, setCardsShowParams] = useState({ sum: 0, more: 0 });
   const [isMount, setIsMount] = useState(true);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (width > 1331) {
-      setCardsShowParams({ sum: 8, more: 4 });
+      setCardsShowParams(CARDS_TO_SHOW_AT_1331);
     } else if (width <= 1331 && width > 1027) {
-      setCardsShowParams({ sum: 12, more: 3 });
+      setCardsShowParams(CARDS_TO_SHOW_AT_1027_1331);
     } else if (width <= 1027 && width > 629) {
-      setCardsShowParams({ sum: 8, more: 2 });
+      setCardsShowParams(CARDS_TO_SHOW_AT_629_1027);
     } else if (width <= 629) {
-      setCardsShowParams({ sum: 5, more: 2 });
+      setCardsShowParams(CARDS_TO_SHOW_AT_629);
     }
     return () => setIsMount(false);
   }, [width, isMount]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (moviesList.length && !savedMoviesPage) {
       const res = moviesList.filter(
         (item, index) => index < cardsShowParams.sum

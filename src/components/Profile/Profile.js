@@ -28,7 +28,7 @@ function Profile({ onUpdateUser, onSignOut }) {
       currentUser.name === values.name &&
       currentUser.email === values.email
     ) {
-      setIsFormCorrect(false);
+      setIsEditingAvailable(false);
     }
   }, [currentUser, values, setIsFormCorrect]);
 
@@ -36,8 +36,8 @@ function Profile({ onUpdateUser, onSignOut }) {
     setIsEditingAvailable(true);
   };
 
-  function handleSubmit(evt) {
-    evt.PreventDefault();
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
     onUpdateUser(values.name, values.email);
   };
 

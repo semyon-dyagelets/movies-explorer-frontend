@@ -1,7 +1,8 @@
 import React from 'react';
+import { SHORT_FILMS_DURATION } from "./constants";
 
 function filterShortMovies(movies){
-    return movies.filter((item) => item.duration < 40);
+    return movies.filter((item) => item.duration < SHORT_FILMS_DURATION);
   };
 
 function filterMovies(movies, searchQuery, shortFilms) {
@@ -60,8 +61,8 @@ function convertDurationToHHMM(duration) {
 
 function setDefaultImage(movies) {
   movies.forEach(movie => {
-    if(!movie.image){
-      movie.image = "https://pics.freeicons.io/uploads/icons/png/1981435991595452847-512.png";
+    if(!movie.image.url){
+      movie.image.url = "https://pics.freeicons.io/uploads/icons/png/1981435991595452847-512.png";
     }
   });
 };

@@ -29,6 +29,7 @@ function App() {
   const [isError, setIsError] = useState(false);
   const [isInfoErrorShown, setIsInfoErrorShown] = useState(false);
 
+
   useEffect(() => {
     if (loggedIn) {
       mainApi
@@ -64,7 +65,7 @@ function App() {
       .register(name, email, password)
       .then((data) => {
         if (data) {
-          handleLogin(data.email, password);
+          handleLogin(email, password);
           history.push("/movies");
         }
       })
@@ -132,9 +133,9 @@ function App() {
     history.push("/");
   }
 
-  function handleSaveMovie(movie) {
+  function handleSaveMovie(card) {
     mainApi
-      .addMovie(movie)
+      .addMovie(card)
       .then((newMovie) => {
         setSavedMovies([newMovie, ...savedMovies]);
       })

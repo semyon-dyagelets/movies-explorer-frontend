@@ -6,13 +6,12 @@ import ErrorInfoTool from "../ErrorInfoTool/ErrorInfoTool";
 import headerLogo from "../../images/logo.svg";
 
 function Login({ onLogin, isErrorShown }) {
-  const { values, errors, isFormCorrect, handleChange, resetForm } =
+  const { values, errors, isFormCorrect, handleChange } =
     useFormValidation();
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
     onLogin(values.email, values.password);
-    resetForm();
   };
 
   return (

@@ -51,7 +51,7 @@ class MainAPI {
     }).then(this._checkResponse);
   }
 
-  editProfile(data) {
+  editProfile(name, email) {
     return fetch(`${this._mainApiURL}/users/me`, {
       method: "PATCH",
       headers: {
@@ -59,8 +59,8 @@ class MainAPI {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name: data.name,
-        email: data.email,
+        name,
+        email,
       }),
     }).then(this._checkResponse);
   }
@@ -86,7 +86,8 @@ class MainAPI {
     nameRU,
     nameEN,
     id,
-  }) {
+  // data
+}) {
     return fetch(`${this._mainApiURL}/movies`, {
       method: "POST",
       headers: {
@@ -95,13 +96,13 @@ class MainAPI {
       },
       body: JSON.stringify({
         country: country || 'no country',
-        director,
-        duration,
-        year,
-        description,
-        image,
+        director: director,
+        duration: duration,
+        year: year,
+        description: description,
+        image: `${'https://api.nomoreparties.co'}${image.url}`,
         trailer: trailerLink,
-        thumbnail,
+        thumbnail: `${'https://api.nomoreparties.co'}${image.formats.thumbnail.url}`,
         nameRU: nameRU || 'no name',
         nameEN: nameEN || 'no name',
         movieId: id,
