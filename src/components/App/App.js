@@ -19,7 +19,6 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import "./App.css";
 
 function App() {
-
   const history = useHistory();
 
   const [loggedIn, setLoggedIn] = useState(false);
@@ -29,12 +28,12 @@ function App() {
   const [isError, setIsError] = useState(false);
   const [isInfoErrorShown, setIsInfoErrorShown] = useState(false);
 
-
   useEffect(() => {
     if (loggedIn) {
       mainApi
         .getUserInfo()
         .then((userInfo) => {
+          setLoggedIn(true);
           setCurrentUser(userInfo);
         })
         .catch((err) => {
@@ -48,7 +47,6 @@ function App() {
       mainApi
         .getUsersMovies()
         .then((data) => {
-          console.log(data);
           setSavedMovies(data);
           setIsError(false);
         })
@@ -61,12 +59,12 @@ function App() {
 
   function handleRegister(name, email, password) {
     setIsLoading(true);
-    return mainApi
+    mainApi
       .register(name, email, password)
       .then((data) => {
         if (data) {
           handleLogin(email, password);
-          history.push("/movies");
+          // history.push("/movies");
         }
       })
       .catch((err) => {
@@ -78,7 +76,7 @@ function App() {
 
   function handleLogin(email, password) {
     setIsLoading(true);
-    return mainApi
+    mainApi
       .login(email, password)
       .then((res) => {
         if (res.token) {
@@ -94,26 +92,33 @@ function App() {
       .finally(() => setIsLoading(false));
   }
 
-  const tokenCheck = React.useCallback(() => {
+  const [isAuthChecking, setIsAuthChecking] = React.useState(true);
+
+  const checkLogin = React.useCallback(() => {
+    setIsAuthChecking(true);
     const token = localStorage.getItem("token");
     if (token) {
       mainApi
-        .getUserInfo(token)
+        .checkToken(token)
         .then((res) => {
-          if (res.token) {
-            localStorage.setItem("token", res.token);
+          if (res) {
             setLoggedIn(true);
             setCurrentUser(res);
+            history.push("/movies");
           }
-          history.push("/movies");
         })
-        .catch(() => history.push("/signin"));
+        .catch((err) => {
+          console.log(err);
+        })
+        .finally(() => setIsAuthChecking(false));
+    } else {
+      setIsAuthChecking(false);
     }
   }, [history]);
 
-  React.useEffect(() => {
-    tokenCheck();
-  }, [tokenCheck]);
+  useEffect(() => {
+    checkLogin();
+  }, [checkLogin]);
 
   function handleUpdateUser(name, email) {
     mainApi
@@ -130,7 +135,9 @@ function App() {
     localStorage.removeItem("jwt");
     setCurrentUser({});
     setLoggedIn(false);
+    localStorage.clear();
     history.push("/");
+    console.log(localStorage.clear);
   }
 
   function handleSaveMovie(card) {
@@ -169,16 +176,20 @@ function App() {
 
             <Switch>
               <ProtectedRoute
-                exact path="/movies"
+                isChecking={isAuthChecking}
+                exact
+                path="/movies"
                 loggedIn={loggedIn}
                 component={Movies}
-                savedMovies={savedMovies}
+                savedMoviesList={savedMovies}
                 onLikeMovie={handleSaveMovie}
                 onDeleteMovie={handleDeleteMovie}
               />
 
               <ProtectedRoute
-                exact path="/saved-movies"
+                isChecking={isAuthChecking}
+                exact
+                path="/saved-movies"
                 loggedIn={loggedIn}
                 component={SavedMovies}
                 moviesList={savedMovies}
@@ -187,41 +198,42 @@ function App() {
               />
 
               <ProtectedRoute
-                exact path="/profile"
+                isChecking={isAuthChecking}
+                exact
+                path="/profile"
                 loggedIn={loggedIn}
                 component={Profile}
                 onSignOut={handleSignOut}
                 onUpdateUser={handleUpdateUser}
               />
 
-              <Route 
-              exact path="/">
+              <Route exact path="/">
                 <Main />
               </Route>
 
-              <Route 
-              path="/signin">
+              <Route path="/signin">
                 {loggedIn ? (
                   <Redirect to="/movies" />
                 ) : (
-                  <Login 
-                  onLogin={handleLogin}
-                  isErrorShown={isInfoErrorShown} />
+                  <Login
+                    onLogin={handleLogin}
+                    isErrorShown={isInfoErrorShown}
+                  />
                 )}
               </Route>
 
-              <Route 
-              path="/signup">
+              <Route path="/signup">
                 {loggedIn ? (
                   <Redirect to="/movies" />
                 ) : (
-                  <Register onRegister={handleRegister} 
-                  isErrorShown={isInfoErrorShown}/>
+                  <Register
+                    onRegister={handleRegister}
+                    isErrorShown={isInfoErrorShown}
+                  />
                 )}
               </Route>
 
-              <Route 
-              path="*">
+              <Route path="*">
                 <PageNotFound />
               </Route>
             </Switch>

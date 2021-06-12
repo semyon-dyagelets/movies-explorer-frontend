@@ -1,14 +1,14 @@
-import React from "react";
-import "./SavedMovies.css";
+import React, {useState, useEffect} from "react";
 import SearchForm from "../Movies/SearchForm/SearchForm";
 import MoviesCardList from "../Movies/MoviesCardsList/MoviesCardsList";
 import { filterMovies } from "../../utils/utils";
+import "./SavedMovies.css";
 
 function SavedMovies({ moviesList, onDeleteMovie, isError }) {
-  const [searchQuery, setSearchQuery] = React.useState("");
-  const [shortFilms, setShortFilms] = React.useState("off");
-  const [filteredMovies, setFilteredMovies] = React.useState(moviesList);
-  const [isMovieNotFound, setIsMovieNotFound] = React.useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [shortFilms, setShortFilms] = useState("off");
+  const [filteredMovies, setFilteredMovies] = useState(moviesList);
+  const [isMovieNotFound, setIsMovieNotFound] = useState(false);
 
   function handleSearchSubmit(value) {
     setSearchQuery(value);
@@ -16,11 +16,12 @@ function SavedMovies({ moviesList, onDeleteMovie, isError }) {
     setFilteredMovies(resultList);
   }
 
-  function handleShortFilms(e) {
-    setShortFilms(e.target.value);
+  function handleShortFilms(evt) {
+    setShortFilms(evt.target.value);
+    localStorage.setItem("shortFilms", evt.target.value);
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
     const arr = filterMovies(moviesList, searchQuery, shortFilms);
     setFilteredMovies(arr);
     if (searchQuery) {
@@ -31,7 +32,7 @@ function SavedMovies({ moviesList, onDeleteMovie, isError }) {
   return (
     <section className="movies__container">
       <SearchForm
-        onSearchClick={handleSearchSubmit}
+        onSearchFormSubmit={handleSearchSubmit}
         onCheckbox={handleShortFilms}
         shortFilms={shortFilms}
         savedMoviesPage={true}

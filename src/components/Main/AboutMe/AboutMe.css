@@ -44,7 +44,7 @@
 
 .about-me__photo {
   display: block;
-  max-width: 270px;
+  max-height: 270px;
   border-radius: 10px;
 }
 

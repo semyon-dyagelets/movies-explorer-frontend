@@ -33,6 +33,10 @@
   background-color: #fafafa;
 }
 
+.profile__button:disabled {
+  opacity: .2;
+}
+
 .profile__link {
   display: block;
   text-align: center;

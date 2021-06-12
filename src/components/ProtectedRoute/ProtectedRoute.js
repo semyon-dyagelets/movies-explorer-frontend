@@ -1,13 +1,18 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
+import Preloader from "../Movies/Preloader/Preloader";
 
-const ProtectedRoute = ({ component: Component, ...props }) => {
+const ProtectedRoute = ({ component: Component, isChecking, ...props }) => {
   return (
     <Route>
-      {() => (props.loggedIn ? 
-      <Component {...props} /> 
-      :
-      <Redirect to="./" />)}
+      {isChecking ? (
+        <Preloader />
+      ) : (
+        () => (props.loggedIn ?
+        <Component {...props} />
+        :
+        <Redirect to="./" />)
+      )}
     </Route>
   );
 };

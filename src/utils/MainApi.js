@@ -1,4 +1,4 @@
-import { MAIN_URL } from './constants';
+import { MAIN_URL, localHost } from './constants';
 
 class MainAPI {
   constructor({ mainApiURL }) {
@@ -41,6 +41,17 @@ class MainAPI {
     }).then(this._checkResponse);
   }
 
+  checkToken(token) {
+    return fetch(`${this._mainApiURL}/users/me`, {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+        }
+    }).then(this._checkResponse);
+}
+
   getUserInfo() {
     return fetch(`${this._mainApiURL}/users/me`, {
       method: "GET",
@@ -74,41 +85,40 @@ class MainAPI {
     }).then(this._checkResponse);
   }
 
-  addMovie({
-    country,
+addMovie({
+  country,
     director,
     duration,
     year,
     description,
     image,
     trailerLink,
-    thumbnail,
     nameRU,
     nameEN,
-    id,
-  // data
+    thumbnail,
+    id
 }) {
-    return fetch(`${this._mainApiURL}/movies`, {
-      method: "POST",
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("token")}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        country: country || 'no country',
-        director: director,
-        duration: duration,
-        year: year,
-        description: description,
-        image: `${'https://api.nomoreparties.co'}${image.url}`,
+  return fetch(`${this._mainApiURL}/movies`, {
+    method: "POST",
+    headers: {
+      authorization: `Bearer ${localStorage.getItem("token")}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      country: country || 'no country',
+        director,
+        duration,
+        year,
+        description,
+        image: `https://api.nomoreparties.co${image.url}`,
         trailer: trailerLink,
-        thumbnail: `${'https://api.nomoreparties.co'}${image.formats.thumbnail.url}`,
         nameRU: nameRU || 'no name',
         nameEN: nameEN || 'no name',
+        thumbnail: `https://api.nomoreparties.co${image.url}`,
         movieId: id,
-      }),
-    }).then(this._checkResponse);
-  }
+    }),
+  }).then(this._checkResponse);
+}
 
   deleteMovie(movieId) {
     return fetch(`${this._mainApiURL}/movies/${movieId}`, {

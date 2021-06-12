@@ -4,12 +4,11 @@ import SearchForm from "./SearchForm/SearchForm";
 import {
   filterMovies,
   filterShortMovies,
-  setDefaultImage,
 } from "../../utils/utils";
 import moviesApi from "../../utils/MoviesApi";
 import "./Movies.css";
 
-function Movies({ onDeleteMovie, onLikeMovie, savedMovies }) {
+function Movies({ onDeleteMovie, onLikeMovie, savedMoviesList }) {
 
   const forCheckbox =
     localStorage.getItem("shortFilms") === "on" ? 
@@ -23,12 +22,11 @@ function Movies({ onDeleteMovie, onLikeMovie, savedMovies }) {
   const [allMovies, setAllMovies] = useState([]);
   const [isMovieNotFound, setIsMovieNotFound] = useState(false);
   const [isMoviesLoading, setIsMoviesLoading] = useState(false);
-  const [isError, setIsError] = React.useState(false);
+  const [isError, setIsError] = useState(false);
 
   function handleSetFilteredMovies(movies, query, checkbox) {
     const moviesList = filterMovies(movies, query);
-    setFilteredMovies(
-      checkbox === "on" ? 
+    setFilteredMovies( checkbox === "on" ? 
       filterShortMovies(moviesList) 
       :
       moviesList
@@ -47,7 +45,6 @@ function Movies({ onDeleteMovie, onLikeMovie, savedMovies }) {
         .getInitialMovies()
         .then((data) => {
           console.log(data);
-          setDefaultImage(data);
           setAllMovies(data);
           handleSetFilteredMovies(data, value, shortFilms);
         })
@@ -99,11 +96,12 @@ function Movies({ onDeleteMovie, onLikeMovie, savedMovies }) {
       <MoviesCardsList
         isLoading={isMoviesLoading}
         moviesList={filteredMovies}
+        list={filteredMovies}
         isListEmpty={isMovieNotFound}
         isError={isError}
         onDeleteMovie={onDeleteMovie}
         onLikeMovie={onLikeMovie}
-        savedMovies={savedMovies}
+        savedMovies={savedMoviesList}
       />
     </section>
   );

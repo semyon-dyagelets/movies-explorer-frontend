@@ -59,19 +59,10 @@ function convertDurationToHHMM(duration) {
   return `${hours}ч ${minutes}м`
 }
 
-function setDefaultImage(movies) {
-  movies.forEach(movie => {
-    if(!movie.image.url){
-      movie.image.url = "https://pics.freeicons.io/uploads/icons/png/1981435991595452847-512.png";
-    }
-  });
-};
-
 export {
   filterShortMovies,
   filterMovies,
   getSavedMovie,
   useWindowWidth,
-  setDefaultImage,
   convertDurationToHHMM,
 }

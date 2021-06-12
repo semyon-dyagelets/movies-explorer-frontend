@@ -28,7 +28,7 @@ function Profile({ onUpdateUser, onSignOut }) {
       currentUser.name === values.name &&
       currentUser.email === values.email
     ) {
-      setIsEditingAvailable(false);
+      setIsFormCorrect(false);
     }
   }, [currentUser, values, setIsFormCorrect]);
 
@@ -65,6 +65,7 @@ function Profile({ onUpdateUser, onSignOut }) {
                 value={values.name || ""}
                 minLength="2"
                 maxLength="30"
+                required
                 pattern="^[A-Za-zА-Яа-яЁё /s -]+$"
                 onChange={handleChange}
                 disabled={!isEditingAvailable}
@@ -82,6 +83,7 @@ function Profile({ onUpdateUser, onSignOut }) {
                 id="email"
                 name="email"
                 type="email"
+                required
                 value={values.email || ""}
                 onChange={handleChange}
                 disabled={!isEditingAvailable}
