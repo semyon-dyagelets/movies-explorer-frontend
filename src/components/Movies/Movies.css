@@ -1,3 +1,11 @@
+.movies {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 35px 20px;
+  padding-top: 70px;
+  border-top: 1px solid #e8e8e8;
+}
+
 .movies__container {
   width: calc(100% - 70px * 2);
   margin: 0 auto;
