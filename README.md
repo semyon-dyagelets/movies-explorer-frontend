@@ -3,5 +3,5 @@ __Дипломный проект по курсу "Веб-разработчик
 
 Фронтенд для приложения `MovieLibrary`.
 
-*Публичный адрес сервера https://130.193.46.55  
-*Фронтенд https://movielibrary.nomoredomains.monster
+# Публичный адрес сервера https://130.193.46.55  
+# Фронтенд https://movielibrary.nomoredomains.monster
