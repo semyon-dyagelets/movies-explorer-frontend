@@ -1,10 +1,7 @@
-frontend for diploma project 
+# movies-explorer-frontend
+__Дипломный проект по курсу "Веб-разработчик" от Яндекс.Практикум.__
 
-** дипломный проект
-Фронтенд для приложения дипломного проекта MovieLibrary.
+Фронтенд для приложения `MovieLibrary`.
 
-*Публичный адрес сервера https://130.193.46.55
-
-*Бэкенд https://api.movielibrary.nomoredomains.monster
-
+*Публичный адрес сервера https://130.193.46.55  
 *Фронтенд https://movielibrary.nomoredomains.monster
